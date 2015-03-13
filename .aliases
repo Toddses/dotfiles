@@ -74,6 +74,10 @@ alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en1"
 alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 
+# Ring the terminal bell, and put a badge on Terminal.app’s Dock icon
+# (useful when executing time-consuming commands)
+alias badge="tput bel"
+
 #
 # Cleanup
 #
@@ -90,10 +94,6 @@ alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo 
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
-
-# Ring the terminal bell, and put a badge on Terminal.app’s Dock icon
-# (useful when executing time-consuming commands)
-alias badge="tput bel"
 
 #
 # Git
