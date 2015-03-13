@@ -244,3 +244,12 @@ function o() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
+
+# blast me with all 256 colors
+colorblast () {
+    ( x=`tput op` y=`printf %$((${COLUMNS}-6))s`;
+    for i in {0..256}; do
+        o=00$i;
+        echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;
+    done )
+}
