@@ -3,8 +3,8 @@ function md() {
     mkdir -p "$@" && cd "$@"
 }
 
-# `sublthis` with no arguments opens the current directory in Sublime Text, otherwise
-# opens the given location
+# `sublthis` with no arguments opens the current directory in Sublime Text,
+# otherwise opens the given location
 function sublthis() {
     if [ $# -eq 0 ]; then
         subl .;
@@ -63,9 +63,6 @@ function targz() {
 	echo "${tmpFile}.gz created successfully.";
 }
 
-
-
-
 # Use Git’s colored diff when available
 hash git &>/dev/null;
 if [ $? -eq 0 ]; then
@@ -74,34 +71,18 @@ if [ $? -eq 0 ]; then
 	}
 fi;
 
-
-
-# Create a git.io short URL
-function gitio() {
-	if [ -z "${1}" -o -z "${2}" ]; then
-		echo "Usage: \`gitio slug url\`";
-		return 1;
-	fi;
-	curl -i http://git.io/ -F "url=${2}" -F "code=${1}";
-}
-
-
-
-# Compare original and gzipped file size
-function gz() {
-	local origsize=$(wc -c < "$1");
-	local gzipsize=$(gzip -c "$1" | wc -c);
-	local ratio=$(echo "$gzipsize * 100 / $origsize" | bc -l);
-	printf "orig: %d bytes\n" "$origsize";
-	printf "gzip: %d bytes (%2.2f%%)\n" "$gzipsize" "$ratio";
-}
-
-# Syntax-highlight JSON strings or files
-# Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
+# Syntax highlight JSON strings or files
+# Better version since it can actually accept valid files
+# Usage: json filename.json OR json '{"foo":"bar"}' OR echo '{"foo":"bar"}' | json
 function json() {
-	if [ -t 0 ]; then # argument
-		python -mjson.tool <<< "$*" | pygmentize -l javascript;
-	else # pipe
-		python -mjson.tool | pygmentize -l javascript;
-	fi;
+    # file
+    if [ -e "$*" ]; then
+        python -mjson.tool $* | pygmentize -l json;
+    # pipe
+    elif [ -p /dev/stdin ]; then
+        python -mjson.tool | pygmentize -l json;
+    # string
+    else
+        python -mjson.tool <<< "$*" | pygmentize -l json;
+    fi;
 }
