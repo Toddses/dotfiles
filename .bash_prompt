@@ -10,48 +10,23 @@ fi
 
 set_prompts() {
 
-    #local black="" blue="" bold="" cyan="" green="" orange="" \
-          #purple="" red="" reset="" white="" yellow=""
-
     local dateCmd=""
 
-    if [ -x /usr/bin/tput ] && tput setaf 1 &> /dev/null; then
-        tput sgr0 # Reset colors
+    # set up the color scheme. based on Belafonte Night iTerm2 theme
+    tput sgr0 # Reset colors
 
-        bold=$(tput bold)
-        reset=$(tput sgr0)
-
-        # colors from Belafonte Night iTerm2 theme
-        black=$(tput setaf 0)
-        blue=$(tput setaf 4)
-        cyan=$(tput setaf 37)
-        green=$(tput setaf 3)
-        orange=$(tput setaf 172)
-        purple=$(tput setaf 2)
-        red=$(tput setaf 1)
-        violet=$(tput setaf 61)
-        magenta=$(tput setaf 9)
-        white=$(tput setaf 8)
-        yellow=$(tput setaf 3)
-        brown=$(tput setaf 5)
-
-    else
-        bold=""
-        reset="\e[0m"
-
-        black="\e[1;30m"
-        blue="\e[1;34m"
-        cyan="\e[1;36m"
-        green="\e[1;32m"
-        orange="\e[1;33m"
-        purple="\e[1;35m"
-        red="\e[1;31m"
-        magenta="\e[1;31m"
-        violet="\e[1;35m"
-        white="\e[1;37m"
-        yellow="\e[1;33m"
-
-    fi
+    bold=$(tput bold)
+    reset=$(tput sgr0)
+    black=$(tput setaf 0)
+    red=$(tput setaf 1)
+    green=$(tput setaf 2)
+    yellow=$(tput setaf 3)
+    blue=$(tput setaf 4)
+    brown=$(tput setaf 5)
+    lightblue=$(tput setaf 6)
+    gray=$(tput setaf 7)
+    darkgray=$(tput setaf 7)
+    white=$(tput setaf 15)
 
     # Only show username/host if not default
     function usernamehost() {
