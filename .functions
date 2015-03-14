@@ -86,3 +86,22 @@ function json() {
         python -mjson.tool <<< "$*" | pygmentize -l json;
     fi;
 }
+
+# Automatically pygmentize 'more' output
+function pyg() {
+    local file=$1;
+    local ext=${file##*.};
+
+    # if it’s a dotfile, treat it as shell script
+    if [[ $file == .* ]]; then
+        more $file | pygmentize -l sh;
+
+    # if a lexer exists for the file ext, use that
+    elif pygmentize -L lexers | grep -q "\.${ext}"; then
+        more $file | pygmentize -l $ext;
+
+    # otherwise just let pygmentize figure it out
+    else
+        more $file | pygmentize;
+    fi;
+}
