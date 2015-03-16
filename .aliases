@@ -104,3 +104,9 @@ alias undopush="git push -f origin HEAD^:master"
 
 # git root
 alias gr='[ ! -z `git rev-parse --show-cdup` ] && cd `git rev-parse --show-cdup || pwd`'
+
+#
+# WordPress
+#
+
+alias wpinit="yo wordpress --advanced --verbose"
