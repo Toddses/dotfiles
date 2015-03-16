@@ -88,7 +88,7 @@ function json() {
 }
 
 # Automatically pygmentize 'more' output
-function pyg() {
+function moar() {
     local file=$1;
     local ext=${file##*.};
 
