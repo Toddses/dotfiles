@@ -49,7 +49,7 @@ alias la="ls -la | awk '
 #
 
 alias cask='brew cask'
-alias brewupdate="brew update; brew upgrade; brew cleanup;"
+alias brewupdate="brew update; brew upgrade --all; brew cleanup;"
 
 # brew services actions
 alias apache.start="brew services start httpd22"
