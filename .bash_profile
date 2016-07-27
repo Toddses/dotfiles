@@ -1,4 +1,7 @@
 # For homebrew executables
+export PATH=${PATH}:$(brew --prefix)/Cellar/android-sdk/platform-tools:$(brew --prefix)/Cellar/android-sdk/tools
+export JAVA_HOME=$(/usr/libexec/java_home)
+export PATH=${JAVA_HOME}/bin:$PATH
 export PATH="/usr/local/sbin:$PATH"
 
 # Load ~/.extra, ~/.bash_prompt, ~/.exports, ~/.aliases and ~/.functions
@@ -47,7 +50,7 @@ elif [ -f /etc/bash_completion ]; then
 fi;
 
 # homebrew completion
-source `brew --repository`/Library/Contributions/brew_bash_completion.sh
+#source `brew --repository`/Library/Contributions/brew_bash_completion.sh
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
