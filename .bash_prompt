@@ -1,6 +1,6 @@
 # Shell prompt inspired by paulirish, mathiasbynens
 
-default_username='toddses'
+default_username='tmiller'
 
 if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
     export TERM=gnome-256color

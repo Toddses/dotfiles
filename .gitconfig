@@ -1,7 +1,7 @@
 [user]
     # my info
-    name = Todd Miller
-    email = toddses@gmail.com
+	name = Todd Miller
+	email = toddses@gmail.com
 
 [alias]
     c = commit -am
@@ -31,7 +31,7 @@
 	whitespace = fix
 
 [core]
-	excludesfile = ~/.gitignore
+	excludesfile = /Users/tmiller/.gitignore_global
 	attributesfile = ~/.gitattributes
 
 	# Treat spaces before tabs and all kinds of trailing whitespace as an error
@@ -51,7 +51,7 @@
     filemode = false
 
 [color]
-	ui = always
+	ui = true
 
 [color "branch"]
 	current = yellow reverse
@@ -100,3 +100,13 @@
 # http://rentzsch.tumblr.com/post/564806957/public-but-hackable-git-submodules
 [url "git@github.com:Toddses/"]
   insteadOf = "git://github.com/Toddses/"
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/tmiller/.stCommitMsg
+[credential]
+	helper = cache --timeout=604800

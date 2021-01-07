@@ -1,13 +1,16 @@
 # For homebrew executables
 export PATH=${PATH}:$(brew --prefix)/Cellar/android-sdk/platform-tools:$(brew --prefix)/Cellar/android-sdk/tools
+export ANDROID_NDK=$(brew --prefix)/Cellar/android-ndk/r12
 export JAVA_HOME=$(/usr/libexec/java_home)
 export PATH=${JAVA_HOME}/bin:$PATH
 export PATH="/usr/local/sbin:$PATH"
+export PATH="~/Library/Python/3.6/bin:$PATH"
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 
 # Load ~/.extra, ~/.bash_prompt, ~/.exports, ~/.aliases and ~/.functions
 # ~/.extra can be used for settings you don’t want to commit
 for file in ~/.{extra,bash_prompt,exports,aliases,functions}; do
-    [ -r "$file" ] && source "$file"
+	[ -r "$file" ] && source "$file"
 done
 unset file
 
@@ -15,18 +18,18 @@ unset file
 GRC=`which grc`
 if [ "$TERM" != dumb ] && [ -n "$GRC" ]
 then
-    alias colourify="$GRC -es --colour=auto"
-    alias configure='colourify ./configure'
-    alias diff='colourify diff'
-    alias make='colourify make'
-    alias gcc='colourify gcc'
-    alias g++='colourify g++'
-    alias as='colourify as'
-    alias gas='colourify gas'
-    alias ld='colourify ld'
-    alias netstat='colourify netstat'
-    alias ping='colourify ping'
-    alias traceroute='colourify /usr/sbin/traceroute'
+	alias colourify="$GRC -es --colour=auto"
+	alias configure='colourify ./configure'
+	alias diff='colourify diff'
+	alias make='colourify make'
+	alias gcc='colourify gcc'
+	alias g++='colourify g++'
+	alias as='colourify as'
+	alias gas='colourify gas'
+	alias ld='colourify ld'
+	alias netstat='colourify netstat'
+	alias ping='colourify ping'
+	alias traceroute='colourify /usr/sbin/traceroute'
 fi
 
 # Case-insensitive globbing (used in pathname expansion)
@@ -44,9 +47,9 @@ shopt -s cdspell;
 
 # Add tab completion for many Bash commands
 if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
-    source "$(brew --prefix)/etc/bash_completion";
+	source "$(brew --prefix)/etc/bash_completion";
 elif [ -f /etc/bash_completion ]; then
-    source /etc/bash_completion;
+	source /etc/bash_completion;
 fi;
 
 # homebrew completion
@@ -64,11 +67,12 @@ complete -W "NSGlobalDomain" defaults
 #
 
 # init z   https://github.com/rupa/z
-. ~/bin/z/z.sh
+#. ~/bin/z/z.sh
 
-# Add NVM
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
+# setup NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Initialize rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -84,22 +88,36 @@ source ~/.bin/tmuxinator.bash
 SSH_ENV="$HOME/.ssh/environment"
 
 function start_agent {
-    echo "Initialising new SSH agent..."
-    /usr/local/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-    echo succeeded
-    chmod 600 "${SSH_ENV}"
-    . "${SSH_ENV}" > /dev/null
-    /usr/local/bin/ssh-add;
+	echo "Initialising new SSH agent..."
+	/usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+	echo succeeded
+	chmod 600 "${SSH_ENV}"
+	. "${SSH_ENV}" > /dev/null
+	/usr/bin/ssh-add;
 }
+
+# Terminus ENV
+export GITHUB_TOKEN=0eada5a5cc26c25e56df34afb694c8bf04543e07
+export CIRCLE_TOKEN=0771b4dfd99071554d3adb5b7fe4b3c166b2a222
 
 # Source SSH settings, if applicable
 
 if [ -f "${SSH_ENV}" ]; then
-    . "${SSH_ENV}" > /dev/null
-    #ps ${SSH_AGENT_PID} doesn't work under cywgin
-    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-        start_agent;
-    }
+	. "${SSH_ENV}" > /dev/null
+	#ps ${SSH_AGENT_PID} doesn't work under cywgin
+	ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+		start_agent;
+	}
 else
-    start_agent;
+	start_agent;
+fi
+
+# Include Drush bash customizations.
+if [ -f "/Users/tmiller/.drush/drush.bashrc" ] ; then
+  source /Users/tmiller/.drush/drush.bashrc
+fi
+
+# Include Drush prompt customizations.
+if [ -f "/Users/tmiller/.drush/drush.prompt.sh" ] ; then
+  source /Users/tmiller/.drush/drush.prompt.sh
 fi

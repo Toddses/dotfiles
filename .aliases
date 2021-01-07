@@ -14,6 +14,12 @@ alias p="cd ~/Projects"
 alias g="git"
 alias h="history"
 alias j="jobs"
+alias mux="tmuxinator"
+
+#
+# Wine 64-bit
+#
+alias wine="wine64"
 
 #
 # Listing
@@ -48,19 +54,20 @@ alias la="ls -la | awk '
 # Homebrew
 #
 
-alias cask='brew cask'
-alias brewupdate="brew update; brew upgrade --all; brew cleanup;"
+alias cask="brew cask"
+alias brewupdate="brew -v update; brew upgrade --force-bottle; brew cleanup --prune 60; brew doctor;"
 
 # brew services actions
-alias apache.start="brew services start httpd22"
-alias apache.stop="brew services stop httpd22"
-alias apache.restart="brew services restart httpd22"
-alias php.start="brew services restart php56"
-alias php.stop="brew services restart php56"
-alias php.restart="brew services restart php56"
-alias mysql.start="brew services restart mysql"
-alias mysql.stop="brew services restart mysql"
-alias mysql.restart="brew services restart mysql"
+alias apache.start="brew services start httpd"
+alias apache.stop="brew services stop httpd"
+alias apache.restart="brew services restart httpd"
+#alias php56.start="brew link php56 && brew services start php56"
+#alias php56.stop="brew unlink php56 && brew services stop php56"
+alias php70.start="brew link php71 && brew services start php71"
+alias php70.stop="brew unlink php71 && brew services stop php71"
+alias mysql.start="brew services start mysql@5.7"
+alias mysql.stop="brew services stop mysql@5.7"
+alias mysql.restart="brew services restart mysql@5.7"
 
 #
 # Utility
