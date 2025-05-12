@@ -3,12 +3,10 @@ export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
-export PATH=${PATH}:$(brew --prefix)/Cellar/android-sdk/platform-tools:$(brew --prefix)/Cellar/android-sdk/tools
-export ANDROID_NDK=$(brew --prefix)/Cellar/android-ndk/r12
-export JAVA_HOME=$(/usr/libexec/java_home)
-export PATH=${JAVA_HOME}/bin:$PATH
 export PATH="~/Library/Python/3.6/bin:$PATH"
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+#export PATH="./vendor/bin:$PATH"
+export NODE_GYP_FORCE_PYTHON=/opt/homebrew/bin/python3.10
 
 # Load ~/.extra, ~/.bash_prompt, ~/.exports, ~/.aliases and ~/.functions
 # ~/.extra can be used for settings you don’t want to commit
@@ -96,12 +94,11 @@ function start_agent {
 	echo succeeded
 	chmod 600 "${SSH_ENV}"
 	. "${SSH_ENV}" > /dev/null
-	/usr/bin/ssh-add -K ~/.ssh/id_ed25519;
+	/usr/bin/ssh-add;
 }
 
-# Terminus ENV
-export GITHUB_TOKEN=0eada5a5cc26c25e56df34afb694c8bf04543e07
-export CIRCLE_TOKEN=0771b4dfd99071554d3adb5b7fe4b3c166b2a222
+#### INSERT SECRETS HERE
+
 
 # Source SSH settings, if applicable
 
@@ -124,3 +121,4 @@ fi
 if [ -f "/Users/tmiller/.drush/drush.prompt.sh" ] ; then
   source /Users/tmiller/.drush/drush.prompt.sh
 fi
+export PATH="/opt/homebrew/opt/mysql@8.4/bin:$PATH"

@@ -49,6 +49,7 @@
 
     # Set filemode to false so git doesn't keep file permissions
     filemode = false
+	autocrlf = input
 
 [color]
 	ui = true
@@ -110,3 +111,5 @@
 	template = /Users/tmiller/.stCommitMsg
 [credential]
 	helper = cache --timeout=604800
+[pull]
+	rebase = false
