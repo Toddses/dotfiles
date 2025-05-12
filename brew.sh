@@ -97,5 +97,14 @@ brew install tree
 brew install vbindiff
 brew install zopfli
 
+# Local development
+brew install tmux
+brew install tmuxinator
+brew install yarn
+brew install httpd
+brew install php
+brew install dnsmasq
+brew install composer
+
 # Remove outdated versions from the cellar.
 brew cleanup

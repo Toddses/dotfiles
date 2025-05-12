@@ -1,9 +1,12 @@
 # For homebrew executables
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
 export PATH=${PATH}:$(brew --prefix)/Cellar/android-sdk/platform-tools:$(brew --prefix)/Cellar/android-sdk/tools
 export ANDROID_NDK=$(brew --prefix)/Cellar/android-ndk/r12
 export JAVA_HOME=$(/usr/libexec/java_home)
 export PATH=${JAVA_HOME}/bin:$PATH
-export PATH="/usr/local/sbin:$PATH"
 export PATH="~/Library/Python/3.6/bin:$PATH"
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 
@@ -78,7 +81,7 @@ export NVM_DIR="$HOME/.nvm"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Source Tmuxinator
-source ~/.bin/tmuxinator.bash
+source ~/.tmuxinator/tmuxinator.bash
 
 #
 # SSH Agent
@@ -93,7 +96,7 @@ function start_agent {
 	echo succeeded
 	chmod 600 "${SSH_ENV}"
 	. "${SSH_ENV}" > /dev/null
-	/usr/bin/ssh-add;
+	/usr/bin/ssh-add -K ~/.ssh/id_ed25519;
 }
 
 # Terminus ENV
